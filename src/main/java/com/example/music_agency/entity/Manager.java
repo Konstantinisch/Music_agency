@@ -15,6 +15,7 @@ import java.util.Objects;
 @Table(name = "managers")
 public class Manager {
 
+
     @Id
     @Column(name = "manager_id")
     private int managerId;

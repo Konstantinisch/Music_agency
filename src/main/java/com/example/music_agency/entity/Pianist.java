@@ -15,6 +15,7 @@ import java.util.Objects;
 @Table(name = "pianists")
 public class Pianist {
 
+
     @Id
     @Column (name = "pianist_id")
     private int pianistId;
