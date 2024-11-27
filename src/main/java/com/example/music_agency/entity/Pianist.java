@@ -1,9 +1,6 @@
 package com.example.music_agency.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +12,9 @@ import java.util.Objects;
 @Table(name = "pianists")
 public class Pianist {
 
-
     @Id
     @Column (name = "pianist_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pianistId;
 
     @Column(name = "name")
@@ -31,6 +28,10 @@ public class Pianist {
 
     @Column(name = "duration_of_concert_in_min")
     private int durationOfConcertInMin;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "mp_id_fk", referencedColumnName = "manager_id")
+//    private Manager manager;
 
     @Override
     public boolean equals(Object o) {

@@ -1,12 +1,10 @@
 package com.example.music_agency.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -15,9 +13,9 @@ import java.util.Objects;
 @Table(name = "managers")
 public class Manager {
 
-
     @Id
     @Column(name = "manager_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int managerId;
 
     @Column(name = "name")
@@ -26,11 +24,11 @@ public class Manager {
     @Column(name = "percent_of_gage")
     private int percentOfGage;
 
-    private Orchester orchester;
-
-    private Pianist pianist;
-
-
+//    @OneToMany(mappedBy = "manager")
+//    private List<Orchester> orchester;
+//
+//    @OneToMany(mappedBy = "manager")
+//    private List<Pianist> pianist;
 
     @Override
     public String toString() {
