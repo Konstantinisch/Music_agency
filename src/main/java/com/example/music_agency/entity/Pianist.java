@@ -29,9 +29,9 @@ public class Pianist {
     @Column(name = "duration_of_concert_in_min")
     private int durationOfConcertInMin;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "mp_id_fk", referencedColumnName = "manager_id")
-//    private Manager manager;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mp_id_fk", referencedColumnName = "manager_id")
+    private Manager manager;
 
     @Override
     public boolean equals(Object o) {

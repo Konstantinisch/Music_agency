@@ -1,0 +1,13 @@
+package com.example.music_agency;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MusicAgencyApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(MusicAgencyApplication.class, args);
+	}
+
+}

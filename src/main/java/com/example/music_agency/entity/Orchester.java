@@ -32,9 +32,9 @@ public class Orchester {
     @Column(name = "duration_of_concert_in_min")
     private int durationOfConcertInMin;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "manager_id_fk", referencedColumnName = "manager_id")
-//    private Manager manager;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id_fk", referencedColumnName = "manager_id")
+    private Manager manager;
 
 
     @Override

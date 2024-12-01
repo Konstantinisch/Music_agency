@@ -24,11 +24,11 @@ public class Manager {
     @Column(name = "percent_of_gage")
     private int percentOfGage;
 
-//    @OneToMany(mappedBy = "manager")
-//    private List<Orchester> orchester;
-//
-//    @OneToMany(mappedBy = "manager")
-//    private List<Pianist> pianist;
+    @OneToMany(mappedBy = "manager")
+    private List<Orchester> orchester;
+
+    @OneToMany(mappedBy = "manager")
+    private List<Pianist> pianist;
 
     @Override
     public String toString() {

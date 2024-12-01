@@ -58,6 +58,7 @@ CREATE TABLE orchesters (
                             gage                       INTEGER,
                             duration_of_concert_in_min INTEGER,
                             manager_id_fk              INTEGER
+                            FOREIGN KEY (manager_id_fk) REFERENCES managers (manager_id)
 );
 
 CREATE TABLE pianists (
@@ -67,4 +68,5 @@ CREATE TABLE pianists (
                           gage                       INTEGER,
                           duration_of_concert_in_min INTEGER,
                           mp_id_fk                   INTEGER
+                          -- FOREIGN KEY (mp_id_fk) REFERENCES managers (manager_id)
 );
