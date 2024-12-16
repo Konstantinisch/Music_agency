@@ -10,12 +10,12 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "orchesters")
-public class Orchester {
+public class OrchesterEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orchester_id")
-    private int orchesterId;
+    private Integer orchesterId;
 
     @Column(name = "name")
     private String name;
@@ -34,15 +34,17 @@ public class Orchester {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id_fk", referencedColumnName = "manager_id")
-    private Manager manager;
+    private ManagerEntity manager;
 
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Orchester orchester = (Orchester) o;
-        return orchesterId == orchester.orchesterId && numberOfPeople == orchester.numberOfPeople && gage == orchester.gage && durationOfConcertInMin == orchester.durationOfConcertInMin && Objects.equals(name, orchester.name) && Objects.equals(nameOfProgram, orchester.nameOfProgram);
+        OrchesterEntity orchesterEntity = (OrchesterEntity) o;
+        return orchesterId == orchesterEntity.orchesterId && numberOfPeople == orchesterEntity.numberOfPeople &&
+                gage == orchesterEntity.gage && durationOfConcertInMin == orchesterEntity.durationOfConcertInMin &&
+                Objects.equals(name, orchesterEntity.name) && Objects.equals(nameOfProgram, orchesterEntity.nameOfProgram);
     }
 
     @Override

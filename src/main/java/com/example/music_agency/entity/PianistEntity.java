@@ -10,7 +10,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "pianists")
-public class Pianist {
+public class PianistEntity {
 
     @Id
     @Column (name = "pianist_id")
@@ -31,13 +31,13 @@ public class Pianist {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mp_id_fk", referencedColumnName = "manager_id")
-    private Manager manager;
+    private ManagerEntity manager;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pianist pianist = (Pianist) o;
+        PianistEntity pianist = (PianistEntity) o;
         return pianistId == pianist.pianistId && gage == pianist.gage && durationOfConcertInMin == pianist.durationOfConcertInMin && Objects.equals(name, pianist.name) && Objects.equals(nameOfProgram, pianist.nameOfProgram);
     }
 
