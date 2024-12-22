@@ -7,8 +7,8 @@
 -- database music_agency;
 
 
- drop table if exists orchesters;
- drop table if exists pianists;
+drop table if exists orchesters;
+drop table if exists pianists;
 drop table if exists managers;
 
 
@@ -49,7 +49,6 @@ drop table if exists managers;
 -- );
 
 
-
 CREATE TABLE managers
 (
     manager_id      INTEGER PRIMARY KEY,
@@ -57,7 +56,7 @@ CREATE TABLE managers
     percent_of_gage INTEGER
 );
 
-CREATE TABLE  orchesters
+CREATE TABLE orchesters
 (
     orchester_id               INTEGER PRIMARY KEY,
     name                       VARCHAR(128) NOT NULL,
@@ -66,15 +65,16 @@ CREATE TABLE  orchesters
     gage                       INTEGER,
     duration_of_concert_in_min INTEGER,
     manager_id_fk              INTEGER,
-     FOREIGN KEY (manager_id_fk) REFERENCES managers (manager_id)
+    FOREIGN KEY (manager_id_fk) REFERENCES managers (manager_id)
 );
 
-CREATE TABLE pianists (
-                          pianist_id                 INTEGER PRIMARY KEY ,
-                          name                       VARCHAR(128) NOT NULL,
-                          name_of_program            VARCHAR(128)  NOT NULL,
-                          gage                       INTEGER,
-                          duration_of_concert_in_min INTEGER,
-                          mp_id_fk                   INTEGER,
-                           FOREIGN KEY (mp_id_fk) REFERENCES managers (manager_id)
+CREATE TABLE pianists
+(
+    pianist_id                 INTEGER PRIMARY KEY,
+    name                       VARCHAR(128) NOT NULL,
+    name_of_program            VARCHAR(128) NOT NULL,
+    gage                       INTEGER,
+    duration_of_concert_in_min INTEGER,
+    mp_id_fk                   INTEGER,
+    FOREIGN KEY (mp_id_fk) REFERENCES managers (manager_id)
 );
