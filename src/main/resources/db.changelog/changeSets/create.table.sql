@@ -1,9 +1,3 @@
-drop table if exists orchesters;
-drop table if exists pianists;
-drop table if exists managers;
-
-
-
 CREATE TABLE managers
 (
     manager_id      INTEGER PRIMARY KEY,

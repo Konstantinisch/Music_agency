@@ -52,11 +52,22 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+//        return httpSecurity
+//                .authorizeHttpRequests(au ->
+//                        au.requestMatchers("/manager").hasAnyRole("USER", "ADMIN"))
+//                .formLogin(Customizer.withDefaults())
+//                .build();
+//    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(au ->
-                        au.requestMatchers("/manager").hasRole("MANAGER"))
+                        au.requestMatchers("/manager").hasAnyRole("USER", "ADMIN")
+                                .anyRequest().permitAll())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(Customizer.withDefaults())
                 .build();
     }

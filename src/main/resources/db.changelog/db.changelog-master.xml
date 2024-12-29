@@ -6,7 +6,27 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <!-- Подключаем другие файлы изменений -->
-    <include file="db.changelog/changeSets/create.table.sql" />
+<!--    <include file="db.changelog/changeSets/v0.0/create_managers_table.sql" />-->
+<!--    <include file="db.changelog/changeSets/v0.0/create_orchesters_table.sql" />-->
+<!--    <include file="db.changelog/changeSets/v0.0/create_pianists_table.sql" />-->
+    <changeSet id="create_tables" author="Konstantin">
+        <sqlFile path="db.changelog/changeSets/create.table.sql" />
+    </changeSet>
+    <changeSet id="create_managers" author="Konstantin">
+        <sqlFile path="db.changelog/changeSets/v0.1/insert_managers.sql" />
+    </changeSet>
+    <changeSet id="create_orchesters" author="Konstantin">
+        <sqlFile path="db.changelog/changeSets/v0.1/insert_orchesters.sql" />
+    </changeSet>
+    <changeSet id="create_pianists" author="Konstantin">
+        <sqlFile path="db.changelog/changeSets/v0.1/insert_pianists.sql" />
+    </changeSet>
+<!--    <include file="db.changelog/changeSets/v0.1/insert_managers.sql" />-->
+<!--        <include file="db.changelog/changeSets/v0.1/insert_orchesters.sql" />-->
+<!--        <include file="db.changelog/changeSets/v0.1/insert_pianists.sql" />-->
+<!--    <include file="db.changelog/changeSets/v0.1/insert_managers.sql" />-->
+<!--    <include file="db.changelog/changeSets/v0.1/insert_orchesters.sql" />-->
+<!--    <include file="db.changelog/changeSets/v0.1/insert_pianists.sql" />-->
 <!--    <include file="db.changelog/changeSets/create.table.sql" relativeToChangelogFile="true"/>-->
 <!--    <include file="changelog/2-insert-initial-data.xml" relativeToChangelogFile="true"/>-->
 
