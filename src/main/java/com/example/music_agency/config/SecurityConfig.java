@@ -43,32 +43,35 @@ public class SecurityConfig {
                         .passwordEncoder(new BCryptPasswordEncoder()::encode)
                         .build();
 
-        return new InMemoryUserDetailsManager(user,admin);
+        return new InMemoryUserDetailsManager(user, admin);
     }
 
+    @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService());
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        return httpSecurity
-//                .authorizeHttpRequests(au ->
-//                        au.requestMatchers("/manager").hasAnyRole("USER", "ADMIN"))
-//                .formLogin(Customizer.withDefaults())
-//                .build();
-//    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(au ->
-                        au.requestMatchers("/manager").hasAnyRole("USER", "ADMIN")
-                                .anyRequest().permitAll())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                        au.requestMatchers("/manager").hasAnyRole("USER", "ADMIN").anyRequest().permitAll())
                 .formLogin(Customizer.withDefaults())
                 .build();
     }
+
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+//        return httpSecurity
+//                .csrf(csrf ->csrf.disable())
+//                .authorizeHttpRequests(au ->
+////                        au.requestMatchers("/manager").hasAnyRole("USER", "ADMIN")
+////                                .anyRequest().permitAll())
+//                        au.anyRequest().permitAll())
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .formLogin(Customizer.withDefaults())
+//                .build();
+//    }
 }
