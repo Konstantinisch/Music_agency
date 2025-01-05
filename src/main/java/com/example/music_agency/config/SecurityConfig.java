@@ -133,18 +133,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-    .authorizeHttpRequests(auth ->
-        auth.requestMatchers("/").permitAll() // Разрешить доступ к корневому маршруту
-            .requestMatchers("/manager").hasAnyRole("USER", "ADMIN")
-            .anyRequest().permitAll())
-//
-//
-//
-//        httpSecurity
-//                .csrf(csrf -> csrf.disable()) // Отключаем CSRF (для тестирования REST API)
-//                .authorizeHttpRequests(auth ->
-//                        auth.requestMatchers("/manager").hasAnyRole("USER", "ADMIN") // Доступ для ролей USER и ADMIN
-//                                .anyRequest().permitAll()) // Разрешить остальной доступ без авторизации
+                .csrf(csrf -> csrf.disable()) // Отключаем CSRF (для тестирования REST API)
+                .authorizeHttpRequests(auth ->
+                        auth.requestMatchers("/manager", "/orchesters", "/pianists").hasAnyRole("USER", "ADMIN") // Доступ для ролей USER и ADMIN
+                                .anyRequest().permitAll()) // Разрешить остальной доступ без авторизации
                 .formLogin(Customizer.withDefaults()) // Включаем форму логина
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // REST API в Stateless
                 .build();

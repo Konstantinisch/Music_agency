@@ -3,10 +3,7 @@ package com.example.music_agency.controller;
 import com.example.music_agency.dto.OrchesterDto;
 import com.example.music_agency.service.OrchesterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,21 @@ public class OrchesterController {
     @GetMapping(value = "/{id}")
     public OrchesterDto getOrchesterById(@PathVariable Integer id) {
         return orchesterService.getOrchesterById(id);
+    }
+
+    @PutMapping
+    public OrchesterDto createOrchester(@RequestBody OrchesterDto orchesterDto) {
+        return orchesterService.createOrchester(orchesterDto);
+    }
+
+    @PostMapping
+    public OrchesterDto updateOrchester(@RequestBody OrchesterDto orchesterDto) {
+        return orchesterService.updateOrchester(orchesterDto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteOrchester(@PathVariable Integer id) {
+        orchesterService.deleteOrchester(id);
     }
 }
 

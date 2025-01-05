@@ -1,7 +1,9 @@
 package com.example.music_agency.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
@@ -9,6 +11,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "orchesters")
 public class OrchesterEntity {
 
@@ -35,6 +39,9 @@ public class OrchesterEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id_fk", referencedColumnName = "manager_id")
     private ManagerEntity manager;
+
+    public OrchesterEntity(Object o, String name, String nameOfProgram, int numberOfPeople) {
+    }
 
 
     @Override

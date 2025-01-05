@@ -1,11 +1,15 @@
 package com.example.music_agency.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -32,6 +36,9 @@ public class PianistEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mp_id_fk", referencedColumnName = "manager_id")
     private ManagerEntity manager;
+
+    public PianistEntity(Object o, String name, String nameOfProgram) {
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -16,7 +16,7 @@ public class ManagerController {
 
 
     public final ManagerService managerService;
-    private final ManagerServiceImpl managerServiceImpl;
+
 
 
     @GetMapping("/")
