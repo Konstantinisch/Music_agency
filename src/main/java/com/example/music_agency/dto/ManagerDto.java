@@ -12,4 +12,7 @@ public class ManagerDto {
     private Integer managerId;
     private String name;
     private int percentOfGage;
+
+    public ManagerDto(String name, int percentOfGage) {
+    }
 }

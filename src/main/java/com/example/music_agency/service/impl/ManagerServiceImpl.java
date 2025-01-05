@@ -38,4 +38,29 @@ public class ManagerServiceImpl implements ManagerService {
         ManagerEntity manager = optionalManager.get();
         return manager;
     }
+
+    @Override
+    public ManagerDto createManager(ManagerDto managerDto) {
+        ManagerEntity managerEntity = new ManagerEntity(null, managerDto.getName(),managerDto.getPercentOfGage());
+        ManagerEntity savedManagerEntity = managerRepository.save(managerEntity);
+        return new ManagerDto(savedManagerEntity.getManagerId(), savedManagerEntity.getName(),savedManagerEntity.
+                getPercentOfGage());
+    }
+
+    @Override
+    public ManagerDto updateManager(ManagerDto managerDto) {
+        ManagerEntity managerEntity = new ManagerEntity(null,managerDto.getName(),managerDto.getPercentOfGage());
+        ManagerEntity updatedManagerEntity = managerRepository.save(managerEntity);
+        return new ManagerDto(updatedManagerEntity.getManagerId(), updatedManagerEntity.getName(),
+                updatedManagerEntity.getPercentOfGage());
+    }
+
+    @Override
+    public void deleteManager(Integer id) {
+        ManagerEntity managerEntity = managerRepository.findById(id).orElseThrow(() -> new ManagerDoesntExistException
+                ("manager not exists"));
+        managerRepository.delete(managerEntity);
+    }
+
+
 }

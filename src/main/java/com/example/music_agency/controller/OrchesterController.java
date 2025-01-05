@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/orchesters")
@@ -15,6 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrchesterController {
 
     public final OrchesterService orchesterService;
+
+    @GetMapping
+    public List<OrchesterDto> getAllOrchesters() {
+        return orchesterService.getAllOrchesters();
+    }
 
     @GetMapping(value = "/{id}")
     public OrchesterDto getOrchesterById(@PathVariable Integer id) {

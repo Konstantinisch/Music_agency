@@ -8,5 +8,8 @@ import java.util.List;
 public interface ManagerService {
     List<ManagerDto> getAllManagers();
     ManagerEntity getManagerById(Integer id);
+    ManagerDto createManager(ManagerDto managerDto);
+    ManagerDto updateManager(ManagerDto managerDto);
+    void deleteManager(Integer id);
 
 }

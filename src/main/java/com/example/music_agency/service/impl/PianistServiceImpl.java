@@ -16,7 +16,7 @@ public class PianistServiceImpl implements PianistService {
 
 
     @Override
-    public PianistDto getpianistById(Integer id) {
+    public PianistDto getPianistById(Integer id) {
         PianistEntity pianistentity = pianistRepository.findById(id).orElseThrow(() -> new RuntimeException("Pianist" +
                 " not found"));
         return new PianistDto(pianistentity.getPianistId(), pianistentity.getName(), pianistentity.getNameOfProgram());

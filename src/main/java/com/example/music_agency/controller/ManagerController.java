@@ -5,10 +5,7 @@ import com.example.music_agency.entity.ManagerEntity;
 import com.example.music_agency.service.ManagerService;
 import com.example.music_agency.service.impl.ManagerServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,14 +19,29 @@ public class ManagerController {
     private final ManagerServiceImpl managerServiceImpl;
 
 
-    @GetMapping
+    @GetMapping("/")
     public List<ManagerDto> getAllManagers() {
         return managerService.getAllManagers();
     }
 
     // почему так работает странно?
     @GetMapping("/{id}")
-    public ManagerEntity getManagerById(@PathVariable(name = "id") Integer id) {
+    public ManagerEntity getManagerById(@PathVariable Integer id) {
         return managerService.getManagerById(id);
+    }
+
+    @PutMapping
+    public ManagerDto createManager(@RequestBody ManagerDto managerDto) {
+        return managerService.createManager(managerDto);
+    }
+
+    @PostMapping
+    public ManagerDto updateManager(@RequestBody ManagerDto managerDto) {
+        return managerService.updateManager(managerDto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteManager(@PathVariable Integer id) {
+        managerService.deleteManager(id);
     }
 }

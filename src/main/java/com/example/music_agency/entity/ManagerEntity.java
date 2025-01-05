@@ -2,12 +2,16 @@ package com.example.music_agency.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -32,6 +36,11 @@ public class ManagerEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "manager")
     private List<PianistEntity> pianist;
+
+
+
+    public ManagerEntity(Object o, String name, int percentOfGage) {
+    }
 
     @Override
     public String toString() {

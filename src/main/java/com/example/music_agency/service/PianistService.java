@@ -4,5 +4,5 @@ import com.example.music_agency.dto.PianistDto;
 
 
 public interface PianistService {
-    PianistDto getpianistById(Integer id);
+    PianistDto getPianistById(Integer id);
 }

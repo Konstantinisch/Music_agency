@@ -17,6 +17,6 @@ public class PianistController {
 
     @GetMapping(value = "/{id}")
     public PianistDto getPianistById(@PathVariable Integer id) {
-        return pianistService.getpianistById(id);
+        return pianistService.getPianistById(id);
     }
 }
