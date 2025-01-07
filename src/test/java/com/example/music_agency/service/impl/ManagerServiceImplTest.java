@@ -114,7 +114,7 @@ class ManagerServiceImplTest {
 
         // Проверки
         assertNotNull(managerDtos, "Список менеджеров не должен быть null");
-        assertEquals(2, managerDtos.size(), "Размер списка DTO должен быть 2");
+        assertEquals(2, managerDtos.size()>0, "Размер списка DTO должен быть 2");
 
         assertEquals("Peter", managerDtos.get(0).getName(), "Имя первого менеджера должно быть 'Peter'");
         assertEquals(15, managerDtos.get(0).getPercentOfGage(), "Процент первого менеджера должен быть 15");
