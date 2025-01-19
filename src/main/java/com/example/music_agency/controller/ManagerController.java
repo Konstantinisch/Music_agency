@@ -20,7 +20,7 @@ public class ManagerController {
 
 
     @GetMapping("/")
-    public List<ManagerDto> getAllManagers() {
+    public List<ManagerEntity> getAllManagers() {
         return managerService.getAllManagers();
     }
 

@@ -15,7 +15,7 @@ public class OrchesterController {
 
     public final OrchesterService orchesterService;
 
-    @GetMapping
+    @GetMapping("/")
     public List<OrchesterDto> getAllOrchesters() {
         return orchesterService.getAllOrchesters();
     }

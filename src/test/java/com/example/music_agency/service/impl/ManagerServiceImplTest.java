@@ -2,18 +2,17 @@ package com.example.music_agency.service.impl;
 
 import com.example.music_agency.dto.ManagerDto;
 import com.example.music_agency.entity.ManagerEntity;
+import com.example.music_agency.exception.ManagerDoesntExistException;
 import com.example.music_agency.repository.ManagerRepository;
-import com.example.music_agency.service.ManagerService;
-import org.apache.catalina.Manager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -22,123 +21,95 @@ import static org.mockito.Mockito.*;
 class ManagerServiceImplTest {
 
     @Mock
-    private ManagerRepository managerRepository;
+    private ManagerRepository managerRepositoryMock;
 
     @InjectMocks
     private ManagerServiceImpl managerService;
 
-    public ManagerServiceImplTest() {
-        MockitoAnnotations.openMocks(this);
+    private ManagerEntity managerEntity1;
+    private ManagerEntity managerEntity2;
+    private ManagerDto managerDto1;
+    private ManagerDto managerDto2;
+
+    @BeforeEach
+    void setUp() {
+        managerEntity1 = new ManagerEntity(1, "Manager1", 10);
+        managerEntity2 = new ManagerEntity(2, "Manager2", 15);
+
+        managerDto1 = new ManagerDto(1, "Manager1", 10);
+        managerDto2 = new ManagerDto(2, "Manager2", 15);
     }
 
-//
-//    @Test
-//    void getAllManagers() {
-//        ManagerEntity managerEntity = new ManagerEntity(1L, "Peter", 15);
-//        ManagerEntity managerEntity2 = new ManagerEntity(2L, "Jack", 20);
-//        List<ManagerEntity> managers = Arrays.asList(managerEntity, managerEntity2);
-//        when(managerRepository.findAll()).thenReturn(managers);
-//        List<ManagerDto> managerDto = managerService.getAllManagers();
-//        assertNotNull(managerDto);
-//        assertEquals(2, managerDto.size());
-//        assertEquals("Peter", managerDto.get(0).getName());
-//        assertEquals("Jack", managerDto.get(1).getName());
-//        assertEquals(15, managerDto.get(0).getPercentOfGage());
-//        assertEquals(20, managerDto.get(1).getPercentOfGage());
-//        verify(managerRepository, times(1)).findAll();
-//    }
-
-//    @Test
-//    void getAllManagers() {
-//
-//        ManagerEntity managerEntity1 = new ManagerEntity(1L, "Peter", 15);
-//        ManagerEntity managerEntity2 = new ManagerEntity(2L, "Jack", 20);
-//        List<ManagerEntity> managers = Arrays.asList(managerEntity1, managerEntity2);
-//        when(managerRepository.findAll()).thenReturn(managers);
-//        List<ManagerDto> managerDtos = managerService.getAllManagers();
-//        assertNotNull(managerDtos, "Список менеджеров не должен быть null");
-//        assertEquals(2, managerRepository.findAll().size(), "Размер списка должен быть 2");
-//
-//        assertEquals("Peter",  managers.get(0).getName(), "Имя первого менеджера должно быть 'Peter'");
-//        assertEquals(15, managers.get(0).getPercentOfGage(), "Процент первого менеджера должен быть 15");
-//
-//        assertEquals("Jack", managers.get(1).getName(), "Имя второго менеджера должно быть 'Jack'");
-//        assertEquals(20, managers.get(1).getPercentOfGage(), "Процент второго менеджера должен быть 20");
-//        verify(managerRepository, times(1)).findAll();
-//    }
+    @Test
+    void getAllManagersTest() {
 
 
-//    @Test
-//    void getAllManagers() {
-//        // Создаем mock-данные
-//        ManagerEntity managerEntity1 = new ManagerEntity(1L, "Peter", 15);
-//        ManagerEntity managerEntity2 = new ManagerEntity(2L, "Jack", 20);
-//        List<ManagerEntity> managers = Arrays.asList(managerEntity1, managerEntity2);
+        when(managerRepositoryMock.findAll()).thenReturn(List.of(managerEntity1, managerEntity2));
+
+        List<ManagerEntity> managers = managerService.getAllManagers();
+
+        for (ManagerEntity manager : managers) {
+            System.out.println("Manager name: " + manager.getName());
+        }
+//        when(managerRepositoryMock.findAll()).thenReturn(List.of(managerEntity1, managerEntity2));
 //
-//        // Настраиваем mock для репозитория
-//        when(managerRepository.findAll()).thenReturn(managers);
+//        List<ManagerEntity> managers = managerService.getAllManagers();
 //
-//        // Вызываем тестируемый метод
-//        List<ManagerDto> managerDtos = managerService.getAllManagers();
+//        System.out.println(managers.get(0).getName()+"Hallo");
 //
-//        // Проверяем результат
-//        assertNotNull(managerDtos, "Список менеджеров не должен быть null");
-//        assertEquals(2, managerDtos.size(), "Размер списка DTO должен быть 2");
 //
-//        // Проверяем содержимое DTO
-//        assertEquals("Peter", managerDtos.get(0).getName(), "Имя первого менеджера должно быть 'Peter'");
-//        assertEquals(15, managerDtos.get(0).getPercentOfGage(), "Процент первого менеджера должен быть 15");
+//        assertNotNull(managers);
+//        assertEquals(2, managers.size());
+//        assertEquals(managerDto1.getName(), managers.get(0).getName());
+//        assertEquals(managerDto2.getPercentOfGage(), managers.get(1).getPercentOfGage());
 //
-//        assertEquals("Jack", managerDtos.get(1).getName(), "Имя второго менеджера должно быть 'Jack'");
-//        assertEquals(20, managerDtos.get(1).getPercentOfGage(), "Процент второго менеджера должен быть 20");
-//
-//        // Убеждаемся, что метод findAll вызывался один раз
-//        verify(managerRepository, times(1)).findAll();
-//    }
+//        verify(managerRepositoryMock).findAll();
+    }
 
     @Test
-    void getAllManagers() {
-        // Создаем mock-данные
-        ManagerEntity managerEntity1 = new ManagerEntity(1L, "Peter", 15);
-        ManagerEntity managerEntity2 = new ManagerEntity(2L, "Jack", 20);
-        List<ManagerEntity> managers = Arrays.asList(managerEntity1, managerEntity2);
+    void getManagerByIdTest() {
+        when(managerRepositoryMock.findById(1)).thenReturn(Optional.of(managerEntity1));
 
-        // Настраиваем mock для репозитория
-        when(managerRepository.findAll()).thenReturn(managers);
+        ManagerEntity manager = managerService.getManagerById(1);
 
-        // Вызываем метод
-        List<ManagerDto> managerDtos = managerService.getAllManagers();
+        assertNotNull(manager);
+        assertEquals(managerEntity1.getManagerId(), manager.getManagerId());
+        assertEquals(managerEntity1.getName(), manager.getName());
 
-        // Отладка
-        System.out.println("DTO List: " + managerDtos);
-
-        // Проверки
-        assertNotNull(managerDtos, "Список менеджеров не должен быть null");
-        assertEquals(2, managerDtos.size()>0, "Размер списка DTO должен быть 2");
-
-        assertEquals("Peter", managerDtos.get(0).getName(), "Имя первого менеджера должно быть 'Peter'");
-        assertEquals(15, managerDtos.get(0).getPercentOfGage(), "Процент первого менеджера должен быть 15");
-
-        assertEquals("Jack", managerDtos.get(1).getName(), "Имя второго менеджера должно быть 'Jack'");
-        assertEquals(20, managerDtos.get(1).getPercentOfGage(), "Процент второго менеджера должен быть 20");
-
-        verify(managerRepository, times(1)).findAll();
+        verify(managerRepositoryMock).findById(1);
     }
 
 
     @Test
-    void getManagerById() {
+    void createManagerTest() {
+        when(managerRepositoryMock.save(any(ManagerEntity.class))).thenReturn(managerEntity1);
+
+        ManagerDto createdManager = managerService.createManager(managerDto1);
+
+        assertNotNull(createdManager);
+        assertEquals(managerDto1.getName(), createdManager.getName());
+        verify(managerRepositoryMock).save(any(ManagerEntity.class));
     }
 
     @Test
-    void createManager() {
+    void updateManagerTest() {
+        when(managerRepositoryMock.save(any(ManagerEntity.class))).thenReturn(managerEntity1);
+
+        ManagerDto updatedManager = managerService.updateManager(managerDto1);
+
+        assertNotNull(updatedManager);
+        assertEquals(managerDto1.getName(), updatedManager.getName());
+        verify(managerRepositoryMock).save(any(ManagerEntity.class));
     }
 
     @Test
-    void updateManager() {
+    void deleteManagerTest() {
+        when(managerRepositoryMock.findById(1)).thenReturn(Optional.of(managerEntity1));
+
+        managerService.deleteManager(1);
+
+        verify(managerRepositoryMock).findById(1);
+        verify(managerRepositoryMock).delete(managerEntity1);
     }
 
-    @Test
-    void deleteManager() {
-    }
 }

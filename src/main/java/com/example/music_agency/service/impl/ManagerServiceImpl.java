@@ -21,13 +21,38 @@ public class ManagerServiceImpl implements ManagerService {
 
     public final ManagerRepository managerRepository;
 
-    @Override
-    public List<ManagerDto> getAllManagers() {
+        @Override
+    public List<ManagerEntity> getAllManagers() {
       List<ManagerEntity> managerEntities = managerRepository.findAll();
         return managerEntities.stream()
-                .map(entity -> new ManagerDto(entity.getManagerId(), entity.getName(), entity.getPercentOfGage()))
+                .map(entity -> new ManagerEntity(entity.getManagerId(), entity.getName(), entity.getPercentOfGage()))
                 .collect(Collectors.toList());
     }
+//    @Override
+//    public List<ManagerEntity> getAllManagers() {
+//        List<ManagerEntity> managerEntities = managerRepository.findAll();
+//
+//        // После получения данных из репозитория
+//        managerEntities.forEach(entity ->
+//                System.out.println("Before Mapping: ID=" + entity.getManagerId() +
+//                        ", Name=" + entity.getName() +
+//                        ", Percent=" + entity.getPercentOfGage())
+//        );
+//
+//        List<ManagerEntity> mappedEntities = managerEntities.stream()
+//                .map(entity -> new ManagerEntity(entity.getManagerId(), entity.getName(), entity.getPercentOfGage()))
+//                .collect(Collectors.toList());
+//
+//        // После маппинга
+//        mappedEntities.forEach(mappedEntity ->
+//                System.out.println("After Mapping: ID=" + mappedEntity.getManagerId() +
+//                        ", Name=" + mappedEntity.getName() +
+//                        ", Percent=" + mappedEntity.getPercentOfGage())
+//        );
+//
+//        return mappedEntities;
+//    }
+
 
     @Override
     public ManagerEntity getManagerById(Integer id) {
@@ -41,15 +66,15 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ManagerDto createManager(ManagerDto managerDto) {
-        ManagerEntity managerEntity = new ManagerEntity(null, managerDto.getName(),managerDto.getPercentOfGage());
+        ManagerEntity managerEntity = new ManagerEntity(null, managerDto.getName(), managerDto.getPercentOfGage());
         ManagerEntity savedManagerEntity = managerRepository.save(managerEntity);
-        return new ManagerDto(savedManagerEntity.getManagerId(), savedManagerEntity.getName(),savedManagerEntity.
+        return new ManagerDto(savedManagerEntity.getManagerId(), savedManagerEntity.getName(), savedManagerEntity.
                 getPercentOfGage());
     }
 
     @Override
     public ManagerDto updateManager(ManagerDto managerDto) {
-        ManagerEntity managerEntity = new ManagerEntity(null,managerDto.getName(),managerDto.getPercentOfGage());
+        ManagerEntity managerEntity = new ManagerEntity(null, managerDto.getName(), managerDto.getPercentOfGage());
         ManagerEntity updatedManagerEntity = managerRepository.save(managerEntity);
         return new ManagerDto(updatedManagerEntity.getManagerId(), updatedManagerEntity.getName(),
                 updatedManagerEntity.getPercentOfGage());

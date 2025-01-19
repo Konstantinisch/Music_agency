@@ -14,7 +14,7 @@ public class PianistController {
 
     private final PianistService pianistService;
 
-    @GetMapping
+    @GetMapping("/")
     public List<PianistDto> getPianists() {
         return pianistService.getAllPianists();
     }

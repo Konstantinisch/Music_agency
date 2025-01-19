@@ -6,7 +6,7 @@ import com.example.music_agency.entity.ManagerEntity;
 import java.util.List;
 
 public interface ManagerService {
-    List<ManagerDto> getAllManagers();
+    List<ManagerEntity> getAllManagers();
 
     ManagerEntity getManagerById(Integer id);
 
